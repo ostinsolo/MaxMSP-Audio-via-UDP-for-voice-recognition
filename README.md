@@ -144,6 +144,87 @@ This project implements **real-time audio streaming via UDP** for voice recognit
 }
 ```
 
+### Matrix Processing & Data Flow
+
+#### **How MaxMSP Jit Objects Work**
+Your MaxMSP device uses `jit` objects to capture audio as **float32 matrices**:
+
+1. **Audio Capture**: MaxMSP records audio input
+2. **Matrix Creation**: Audio converted to binary matrix format with header + audio data
+3. **Network Transmission**: Matrix sent as UDP/TCP packets to Node.js scripts
+4. **Header Skipping**: Scripts skip matrix header bytes to reach actual audio samples
+5. **Float32 Decoding**: Binary data converted back to floating-point audio values
+
+#### **Why We Skip Matrix Header Bytes**
+MaxMSP jit matrices include metadata headers before the actual audio data. Different scripts skip different amounts:
+
+- **`sRtin.js`**: Skips 524 bytes (131 * 4) - for speech recognition processing  
+- **`UDP.js`**: Skips 12 bytes (3 * 4) - for basic UDP streaming
+- **`oldscript/`**: Skips 296 bytes (74 * 4) - legacy implementation
+
+*The skip count depends on your specific MaxMSP jit object configuration and matrix dimensions.*
+
+## 📊 Debug Files & Audio Outputs
+
+### **Text Files for Debugging** 
+The scripts generate several text files to help you debug the matrix processing:
+
+#### **`code/matrix_data.txt`**
+- **Location**: `code/` directory
+- **Contains**: Raw decoded float32 values from matrix processing
+- **Purpose**: Debug matrix decoding - if you see `NaN` values, the matrix header skip count is wrong
+- **How to Check**: Look for actual numbers vs. `NaN` - numbers mean successful decoding
+
+#### **`code/float_data.txt`** 
+- **Location**: `code/` directory  
+- **Contains**: Processed float32 audio samples with index numbers
+- **Format**: `index: value` (e.g., `0: 0.234`, `1: -0.123`)
+- **Purpose**: Verify audio samples are being extracted correctly
+- **Note**: Some scripts have this disabled with `// fs.appendFileSync`
+
+### **Audio Output Files**
+The scripts generate audio files you can listen to for testing:
+
+#### **`output.wav`** (Root directory)
+- **Location**: Project root folder
+- **Contains**: Recorded audio from your sessions
+- **Sample Rate**: 44,100 Hz (CD quality)  
+- **Format**: 16-bit WAV file
+- **How to Check**: Double-click to play in any audio player
+
+#### **`code/UDPoutput.wav`**
+- **Location**: `code/` directory
+- **Contains**: Audio specifically processed through UDP streaming
+- **Purpose**: Test UDP audio quality and verify network transmission
+- **How to Check**: Compare with `output.wav` to check UDP vs. other protocols
+
+### **How to Debug Your Setup**
+
+1. **Check Matrix Processing**:
+   ```bash
+   # Look at matrix_data.txt
+   head -20 code/matrix_data.txt
+   # If you see NaN values, matrix header skip count needs adjustment
+   ```
+
+2. **Verify Audio Samples**:
+   ```bash
+   # Check float_data.txt (if enabled)
+   tail -50 code/float_data.txt  
+   # Should show: "index: audio_value" format
+   ```
+
+3. **Test Audio Quality**:
+   - Play `output.wav` - should contain your recorded audio
+   - Play `code/UDPoutput.wav` - should sound similar (UDP version)
+   - No sound = matrix decoding problem
+   - Distorted sound = wrong sample rate or bit depth
+
+4. **Monitor Real-time Processing**:
+   - Watch MaxMSP console for debug messages
+   - Look for "converted X samples" or error messages
+   - Check for "NaN" or "invalid audio value" warnings
+
 ## 🔧 Configuration
 
 ### Audio Settings
