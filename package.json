@@ -1,0 +1,22 @@
+{
+  "name": "asa_for_ableton",
+  "version": "1.0.0",
+  "description": "UDP Audio Project - Network audio transmission comparing TCP vs UDP protocols. Features real-time audio streaming (UDP), reliable file transfer (TCP), serial communication, and speech recognition. UDP preferred for low-latency audio applications, TCP for guaranteed delivery.",
+  "main": "sRtin.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ffmpeg-static": "^5.2.0",
+    "fluent-ffmpeg": "^2.1.3",
+    "node-record-lpcm16": "^1.0.1",
+    "serialport": "^12.0.0",
+    "sox-stream": "^2.0.6",
+    "vosk": "^0.3.39",
+    "wave-resampler": "^1.0.0",
+    "words-to-numbers": "^1.5.1"
+  }
+}

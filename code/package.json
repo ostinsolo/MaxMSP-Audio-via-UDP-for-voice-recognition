@@ -1,0 +1,19 @@
+{
+  "name": "upd_audio",
+  "version": "1.0.0",
+  "description": "UDP Audio Project - Network audio transmission comparing TCP vs UDP protocols. Includes real-time audio streaming (UDP), reliable file transfer (TCP), speech recognition with networking, and audio buffer management.",
+  "main": "sRtin.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "node-record-lpcm16": "^1.0.1",
+    "serialport": "^12.0.0",
+    "vosk": "^0.3.39",
+    "wave-resampler": "^1.0.0",
+    "words-to-numbers": "^1.5.1"
+  }
+}
