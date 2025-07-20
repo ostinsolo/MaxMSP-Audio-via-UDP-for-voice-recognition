@@ -9,29 +9,41 @@ A real-time audio streaming and voice recognition system using MaxMSP, Node.js, 
 
 ### Required Software
 
-1. **SoX (Sound eXchange)** - Audio processing library
+1. **Max/MSP** or **Ableton Live** (with Max for Live)
+   - *Node.js is built into Max/MSP - no separate installation needed!*
+
+2. **SoX (Sound eXchange)** - Audio processing library *(being phased out)*
    - **Download**: [https://sourceforge.net/projects/sox/files/latest/download](https://sourceforge.net/projects/sox/files/latest/download)
    - Install SoX and ensure it's available in your system PATH
-   - *Note: Some scripts in this repo are working to eliminate the SoX dependency by using native Max/Ableton input instead*
-
-2. **Node.js** (version 12 or higher)
-   - Download from [nodejs.org](https://nodejs.org/)
-
-3. **Max/MSP** or **Ableton Live** (with Max for Live)
+   - *Note: We're actively working to eliminate the SoX dependency by using native Max/Ableton input instead*
 
 ## ⚡ Quick Start
 
-### 1. Clone the Repository
+### 1. Clone to Max for Live Devices Folder
+**Important**: Place this project in your Max for Live devices folder so Max/MSP can find paths easily.
+
 ```bash
+# Navigate to your Max for Live devices folder
+# Common locations:
+# macOS: ~/Documents/Max 8/Max for Live Devices/
+# Windows: Documents\Max 8\Max for Live Devices\
+
+cd "~/Documents/Max 8/Max for Live Devices/"
+
+# Clone the repository
 git clone https://github.com/ostinsolo/MaxMSP-Audio-via-UDP-for-voice-recognition.git
 cd MaxMSP-Audio-via-UDP-for-voice-recognition
 ```
 
-### 2. Install Node Dependencies
+### 2. Install Node Dependencies  
+**Using Terminal:**
 ```bash
 npm install
 ```
-*You can also add this command to a MaxMSP message box to install dependencies directly from Max*
+
+**Or directly from MaxMSP:**
+- Add `npm install` to a **message box** in Max/MSP to install dependencies
+- *Node.js is built into Max/MSP - no separate installation required!*
 
 ### 3. Understanding Node.js in Max
 - Open the Node.js helper in Max: **Help → Reference → node**
@@ -39,7 +51,8 @@ npm install
 - This will help you understand how Node.js scripts integrate with MaxMSP
 
 ### 4. Load the Max Device
-- Open `UDP AUDIO.amxd` in Max/MSP or drag it to an Ableton Live track
+- Open `UDP AUDIO.amxd` from the Max for Live devices folder
+- Drag it to an Ableton Live track, or open directly in Max/MSP
 - This device uses `jit` objects to capture audio as float32 matrices
 
 ## 🎯 Project Overview
@@ -160,27 +173,30 @@ This project implements **real-time audio streaming via UDP** for voice recognit
 ## 📖 Usage Examples
 
 ### Basic UDP Audio Streaming
-1. Open `UDP AUDIO.amxd` in Max/MSP
-2. Run `node code/UDP.js` to start the UDP server
-3. Audio from Max will stream in real-time to the Node.js script
+1. Open `UDP AUDIO.amxd` from your Max for Live devices folder
+2. In Max/MSP console or message box: `node code/UDP.js` to start UDP server
+3. Audio from Max/Ableton will stream in real-time to the Node.js script
 
 ### Speech Recognition
 1. Ensure Vosk model is installed in `model/vosk-model/`
-2. Run `node code/sRtin.js` to start speech recognition
+2. In Max/MSP console: `node code/sRtin.js` to start speech recognition  
 3. Speak into your audio input - text will be output in real-time
 
 ### Hardware Integration
 1. Connect serial device to your computer
-2. Run `node code/SERI.js` for serial communication
+2. Run `node code/SERI.js` for serial communication (use Max message box)
 3. Configure port and baud rate as needed
+
+**Note**: Since Node.js is built into Max/MSP, you can run all scripts directly from Max console or message boxes!
 
 ## 🐛 Troubleshooting
 
 ### Common Issues
-- **SoX not found**: Ensure SoX is installed and in your system PATH
+- **Device not found**: Ensure project is in Max for Live devices folder (`~/Documents/Max 8/Max for Live Devices/`)
+- **Node modules missing**: Run `npm install` from project directory or Max message box
 - **Port conflicts**: Check if ports 7778/7474 are available
-- **Audio dropouts**: Adjust buffer sizes in the scripts
-- **Node modules missing**: Run `npm install` in the project directory
+- **Audio dropouts**: Adjust buffer sizes in the scripts  
+- **SoX not found**: Ensure SoX is installed (we're working to eliminate this dependency)
 
 ### Performance Optimization  
 - Use UDP for lowest latency

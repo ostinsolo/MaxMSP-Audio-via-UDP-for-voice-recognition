@@ -14,10 +14,10 @@ This project aims to:
 
 ### **Quick Start for Contributors**
 1. Fork this repository
-2. Clone your fork locally
-3. Install dependencies: `npm install`
+2. Clone your fork to Max for Live devices folder (`~/Documents/Max 8/Max for Live Devices/`)
+3. Install dependencies: `npm install` (Node.js is built into Max/MSP)
 4. Make your changes
-5. Test with Max/MSP or Ableton Live
+5. Test with Max/MSP or Ableton Live from the devices folder
 6. Submit a Pull Request
 
 ### **Types of Contributions We Need**

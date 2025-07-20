@@ -1,0 +1,31 @@
+# Dependencies
+node_modules/
+npm-debug.log*
+
+# Audio files (exclude large generated files)
+*.wav
+!output.wav
+!code/UDPoutput.wav
+
+# Debug/log files
+*.log
+code/float_data.txt
+code/matrix_data.txt
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Max/MSP temporary files
+*.maxpat~
+*.amxd~
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Temporary files
+*.tmp
+*.temp 

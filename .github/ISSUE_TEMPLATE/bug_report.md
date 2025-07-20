@@ -18,12 +18,12 @@ A clear description of what the bug is.
 
 ## 💻 **System Info**
 - **OS**: (e.g., macOS 13.5, Windows 11)
-- **Node.js Version**: `node --version`
-- **npm Version**: `npm --version`
+- **Node.js in Max**: Built into Max/MSP (check Max console for version)
+- **Installation Location**: Max for Live devices folder (~/Documents/Max 8/Max for Live Devices/)
 
 ## 🔄 **Steps to Reproduce**
-1. Open MaxMSP and load `UDP AUDIO.amxd`
-2. Run `node code/UDP.js`
+1. Open MaxMSP and load `UDP AUDIO.amxd` from Max for Live devices folder
+2. In Max console/message box: `node code/UDP.js`
 3. Start audio playback in Ableton/Max
 4. Observe the issue...
 
